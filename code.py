@@ -13,6 +13,7 @@ DATA_SOURCE = secrets['nightscout_url']
 BG_VALUE = [0, 'sgv']
 BG_DIRECTION = [0, 'direction']
 DATA_AGE = [0, 'date'] # This is in GMT time
+UNITS = secrets['prefer_unit'] if 'prefer_unit' in secrets else None
 
 # Alert Colors
 RED = 0xFF0000;     # CRIT HIGH, CRIT LOW
@@ -70,8 +71,8 @@ def get_bg_color(val, timestamp):
         return GREEN
 
 def text_transform_bg(val):
-    units_for_display = 'mmol/L' if secrets['prefer_unit'] == 'mmolL' else 'mg/dl'
-    value_for_display = mgdl_to_mmolL(val) if secrets['prefer_unit'] == 'mmolL' else val
+    units_for_display = 'mmol/L' if UNITS == 'mmolL' else 'mg/dl'
+    value_for_display = mgdl_to_mmolL(val) if UNITS == 'mmolL' else val
     return '{} {}'.format(str(value_for_display), units_for_display)
 
 def mgdl_to_mmolL(val):
