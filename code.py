@@ -70,7 +70,12 @@ def get_bg_color(val, timestamp):
         return GREEN
 
 def text_transform_bg(val):
-    return str(val) + ' mg/dl'
+    units_for_display = 'mmol/L' if secrets['prefer_unit'] == 'mmolL' else 'mg/dl'
+    value_for_display = mgdl_to_mmolL(val) if secrets['prefer_unit'] == 'mmolL' else val
+    return '{} {}'.format(str(value_for_display), units_for_display)
+
+def mgdl_to_mmolL(val):
+    return "{:.1f}".format(val / 18)
 
 def text_transform_direction(val):
     if val == "Flat":
@@ -116,7 +121,7 @@ pyportal = PyPortal(url=DATA_SOURCE,
                    )
 
 # Preload the font for performance
-pyportal.preload_font(b'mg/dl012345789');
+pyportal.preload_font(b'mg/dloL012345789');
 pyportal.preload_font((0x2191, 0x2192, 0x2193))
 
 #
