@@ -11,4 +11,5 @@ secrets = {
     'aio_key' : 'XXX', # free, needed for the timestamp https://io.adafruit.com/
     'nightscout_url' : 'XXX', # full nightscout url where the data is collected
     'human' : 'XXX', # The person being monitored
+    'prefer_unit' : 'XXX', # Optional, but if present and set to 'mmolL' displays value in mmol/L (default is mgdl)
     }
